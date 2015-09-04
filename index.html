@@ -1,8 +1,121 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">	
+<head>
+	<meta charset="utf-8">
+	<title>Reveal.js 3 Slide Demo</title>
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/league.css" id="theme">	
+	<!--Add support for earlier versions of Internet Explorer -->
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+ 
 <body>
-<h1>Hello World</h1>
-<p> Verkkosovelluskehitys </p>
-<p> Tuomas Kalliola </p>
+	<!-- Wrap the entire slide show in a div using the "reveal" class. -->
+	<div class="reveal">
+		<!-- Wrap all slides in a single "slides" class -->
+		<div class="slides">
+ 
+			<!-- ALL SLIDES GO HERE -->
+			<!-- Each section element contains an individual slide -->
+			<section>
+				<h2>Verkkosovelluskehitys-opintojakso</h2>
+				<p>Tuomas Kalliolan "ploki"</p>
+				<a href="http://fin3er.github.io/#/1">HTTP</a>
+				<a href="http://fin3er.github.io/#/2">FTP</a>
+				<a href="http://fin3er.github.io/#/3">WebSocket</a>
+				<a href="http://fin3er.github.io/#/4">Irclokki</a>		
+			</section>
+ 
+			<section id="show-a-link">
+				<section>
+					<h2>HTTP</h2>
+					<p>-HTTP-lyhenne sanoista Hypertext Transfer Protocol</p>
+					<p>-HTTP 1.1 vielä yleisin, mutta HTTP/2 vuodelta 2015</p>
+					<p>-HTTP-protokolla sijoittuu OSI-tasoissa ylimpään application-kerrokseen.</p>
+					<p>-Perustana World Wide Webille vuodesta 1990, käytetään välittämään Html-tiedostoja, kuvia jne.<p>
+				</section>
+				<section>
+					<p>-Vaaditaan niin client- kuin serverpäässäkin, clientin (request,response) ja serveri (käsittelee request,response)</p>
+					<p>-HTTP-protkollan oletusportti on TCP-portti 80</p>
+					<p>-HTTP-protokolla on tilaton. Serveri ja clientti ovat tietoisia toisistaan vain kyseisin requestin ajan. Istuntojen toteutus esim. evästeiden avulla</p>
+					<p>-Tärkeimpiä HTTP-komentoja ovat esim. GET,POST,HEAD,CONNECT</p>
+				</section>
+				
+			</section>
+ 
+			<section>
+				<section>
+				<h2>FTP</h2>
+					<p>-FTP-lyhenne sanoista File Transfer Protocol</p>
+					<p>-Käytetään siirtämään tiedostoja host:lta toiselle TCP-protokollaa käyttäen, toimii asiakas-palvelin periaatteella</p>
+					<p>-Selaimella voi yhdistää FTP-osoitteisiin samoin kuin HTTP-osoitteisiinkin</p>
+					<p>-FTP voi toimia aktiivisessa(palvelin aloittaa itse tiedonsiirron) tai passiivisessa(palvelin odottaa asiakkaan aloitusta) tilassa</p>
+				</section>
+				<section>
+					<p>-Dataa voidaan lähettää neljässä eri muodossa: ASCII,Image(Binary), EBCDIC tai Paikallisesti</p>
+					<p>-Datan lähetystavoille on kolme eri tapaa: Stream mode, Block mode tai Compressed mode</p>
+					<p>-Käyttää kahta eri porttia. Oletuksena TCP-portti 21 yhteydenmuodostukseen ja portti 20 datan siirtoon</p>
+					<p>-Tärkeimpiä FTP-komentoja ovat esim. USER,PASS,QUIT, CWD, TYPE, RETR, PORT</p>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>WebSocket</h2>
+					<p>-WebSocket on TCP-protokollaan pohjautuva verkkoprotokolla, joka mahdollistaa bidirektionaalisen yhteyden Websovelluksen ja WebSocket-serverin välillä</p>
+					<p>-Parannusta HTTP-protokollaan esim. reaaliaikaisissa-peleissä, koska yhteys pysyy auki</p>
+					<p>-Käyttää kuten HTTP-protkolla porttia numero 80, HTTP-serverit ymmärtävät yhteydenmuodosuksen upgrade-pyyntönä</p>
+				</section>
+				<section>
+					<p>-Suurin osa suurista selaimista tukee WebSocket-protokollaa</p>
+					<p>-Kaksi URL-skeemaa: ws. salaamattomille WebSocket yhteksille, wss. salatuille WebSocket-yhteyksille</p>
+					<p>-Yksi tärkeimmistä WebSocket-kirjastoista ohjelmoijalle on socket.io</p>
+					<p>-WebSocket-serveri voidaan kirjoittaa esim. C(++):lla, Pythonilla, Javascriptillä tai PHP:llä</p>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Irc-loggerin pystyttäminen OpenShift-palveluun</h2>
+					<p>Harjoitus tuli tehtyä noin 2 päivää sitten ja tästä ei ollut tallennetta, joten olen muistini varassa. 
+					Pahoittelut jos jokin kohta unohtuu ohjeista. </p>
+				</section>
+				<section>
+					<p>1. Ensimmäisenä loimme sovelluksen opettajan valmiista koodista, joka löytyy githubista:</p>
+					<p>"rhc app create irclokki nodejs-0.10 --from-code https://github.com/jvanhalen/irclokki.git"</p>
+				</section>
+				<section>
+					<p>2. Seuraavaksi sovellukseen lisättiin MySql-cartridge:</p>
+					<p>"rhc cartridge add mysql-5.5 -a irclokki"</p>
+				</section>
+				<section>
+					<p>3. Itselläni oli vaikeuksia ssh-avaimen kanssa, mutta koska kirjoitan ohjeet jälkikäteen en muista ongelmaa aivan tarkkaan. Ongelma kuitenkin johtui oikeastaan siitä etten malttanut noudattaa ohjeita tarpeeksi tarkkaan. Muistaakseni itseltä puuttui tuo puttygen koneelta, ja koitin ratkaista ongelmaa eri tavalla kuin ohjeissa mainittiin. Lopulta kun latasin puttygenin ja seurasin ohjetta orjallisemmin ongelma ratkesi.</p>
+					<p>Ohjeet ssh-yhteyteen puttyn kautta löytyivät täältä:
+					https://developers.openshift.com/en/managing-remote-connection.html#download-the-putty-installer</p>
+					<p>SSH-avaimen sai selville komennolla rhc app-show irclokki tai OpenShiftin sivuilta kohdasta remote Access</p>
+				</section>
+				<section>
+					<p>4. Lopulta kun ssh-yhteys sovellukseen onnistui, käytimme sitä MySql-tietokannan konffaukseen</p>
+				</section>
+				<section>
+					<p>5. Viimeinen komento oli "rhc app restart irclokki" ja lopulta oma bottini löytyi testikanavalta toimien kuten pitikin.</p>
+				</section>
+				</section>
+				<section>
+
+
+ 
+			</div>
+	</div>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+ 
+	<script>
+		// Required, even if empty.
+		Reveal.initialize({
+		});
+	</script>
 </body>
 </html>
