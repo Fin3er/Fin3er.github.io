@@ -60,7 +60,7 @@
 			<section>
 				<section>
 					<h2>WebSocket</h2>
-					<p>-WebSocket on TCP-protokollaan pohjautuva verkkoprotokolla, joka mahdollistaa bidirketionaalisen yhteyden Websovelluksen ja WebSocket-serverin välillä</p>
+					<p>-WebSocket on TCP-protokollaan pohjautuva verkkoprotokolla, joka mahdollistaa bidirektionaalisen yhteyden Websovelluksen ja WebSocket-serverin välillä</p>
 					<p>-Parannusta HTTP-protokollaan esim. reaaliaikaisissa-peleissä, koska yhteys pysyy auki</p>
 					<p>-Käyttää kuten HTTP-protkolla porttia numero 80, HTTP-serverit ymmärtävät yhteydenmuodosuksen upgrade-pyyntönä</p>
 				</section>
@@ -69,7 +69,38 @@
 					<p>-Kaksi URL-skeemaa: ws. salaamattomille WebSocket yhteksille, wss. salatuille WebSocket-yhteyksille</p>
 					<p>-Yksi tärkeimmistä WebSocket-kirjastoista ohjelmoijalle on socket.io</p>
 					<p>-WebSocket-serveri voidaan kirjoittaa esim. C(++):lla, Pythonilla, Javascriptillä tai PHP:llä</p>
+			</section>
+
+			<section>
+				<section>
+					<h2>Irc-loggerin pystyttäminen OpenShift-palveluun</h2>
+					<p>Harjoitus tuli tehtyä noin 2 päivää sitten ja tästä ei ollut tallennetta, joten olen muistini varassa. 
+					Pahoittelut jos jokin kohta unohtuu ohjeista. </p>
 				</section>
+				<section>
+					<p>1. Ensimmäisenä loimme sovelluksen opettajan valmiista koodista, joka löytyy githubista:
+					rhc app create irclokki nodejs-0.10 --from-code https://github.com/jvanhalen/irclokki.git</p>
+				</section>
+				<section>
+					<p>2. Seuraavaksi sovellukseen lisättiin MySql-cartridge:
+					rhc cartridge add mysql-5.5 -a irclokki</p>
+				</section>
+				<section>
+					<p>3. Itselläni oli vaikeuksia ssh-avaimen kanssa, mutta koska kirjoitan ohjeet jälkikäteen en muista ongelmaa aivan tarkkaan. Ongelma kuitenkin johtui oikeastaan siitä etten malttanut noudattaa ohjeita tarpeeksi tarkkaan. Muistaakseni itseltä puuttui tuo puttygen koneelta, ja koitin ratkaista ongelmaa eri tavalla kuin ohjeissa mainittiin. Lopulta kun latasin puttygenin ja seurasin ohjetta orjallisemmin ongelma ratkesi.</p>
+					<p>Ohjeet ssh-yhteyteen puttyn kautta löytyivät täältä:
+					https://developers.openshift.com/en/managing-remote-connection.html#download-the-putty-installer</p>
+					<p>SSH-avaimen sai selville komennolla rhc app-show irclokki tai OpenShiftin sivuilta kohdasta remote Access</p>
+				</section>
+				<section>
+					<p>4. Lopulta kun ssh-yhteys sovellukseen onnistui, käytimme sitä MySql-tietokannan konffaukseen</p>
+				</section>
+				<section>
+					<p>5. Viimeinen komento oli rhc app restart irclokki ja lopulta oma bottini löytyi testikanavalta toimien kuten pitikin.</p>
+				</section>
+				</section>
+				<section>
+
+
  
 			</div>
 	</div>
